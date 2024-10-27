@@ -10,9 +10,9 @@ const pool = new Pool({
 
 pool.connect((error) => {
   if (error) {
-    console.error("❌ Error al conectar la base de datos:", error.stack);
+    console.log('\x1b[31m❌ Error to connect data base:\x1b[0m', error);
   } else {
-    console.log('\x1b[32m✅ Base de datos conectada!\x1b[0m');
+    console.log('\x1b[32m✅ Data base connected!\x1b[0m');
   }
 })
 
