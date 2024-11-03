@@ -37,10 +37,10 @@ const addNewUser = async (userData) => {
     userData.birth_date,
     userData.gender,
     userData.user_name,
-  ].filter((value) => value !== undefined); // Elimina valores indefinidos
+  ].filter((value) => value !== undefined);
 
   await db.query(query, values);
-  return { ...userData, password: undefined }; // Devuelve el objeto sin la contraseña
+  return { ...userData, password: undefined };
 };
 
 const updateUser = async (userData) => {
