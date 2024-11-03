@@ -4,7 +4,12 @@ const usersModel = require("../model/users.model");
 const getAllUsers = async (req, res) => {
   try {
     const users = await usersModel.getAllUsers();
-    res.status(200).json({ success: true, message: "Users retrieved successfully", users });
+
+    res.status(200).json({
+      success: true,
+      message: "Users retrieved successfully",
+      results: users,
+    });
   } catch (error) {
     handleErrorResponse(res, error);
   }
@@ -19,7 +24,11 @@ const getAllUsersByID = async (req, res) => {
       return res.status(404).json({ success: false, message: "Client not found" });
     }
 
-    res.status(200).json({ success: true, message: "Client found", client: user });
+    res.status(200).json({
+      success: true,
+      message: "Client found",
+      client: user
+    });
 
   } catch (error) {
     if (error.code === "22P02") {
@@ -70,9 +79,10 @@ const addNewUser = async (req, res) => {
     });
   } catch (error) {
     if (error.code === "23505") {
-      return res
-        .status(409)
-        .json({ success: false, message: "Email or username already exists" });
+      return res.status(409).json({
+        success: false,
+        message: "Email or username already exists"
+      });
     }
     console.error("Error:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
@@ -85,9 +95,11 @@ const updateUser = async (req, res) => {
 
   try {
     const result = await usersModel.updateUser(userData);
-    res
-      .status(200)
-      .json({ success: true, message: "User updated successfully", result });
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      client: result
+    });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
